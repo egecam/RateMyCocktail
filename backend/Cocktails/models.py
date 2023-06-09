@@ -15,7 +15,7 @@ class Recipe(models.Model):
     body = models.CharField(max_length=1000),
     photo = models.ImageField(upload_to='recipes/'),
     rating = models.IntegerField(max=5, min=0),
-    comment = models.OneToManyField(comment, on_delete=models.CASCADE),
+    comment = models.OneToManyField(Comment, on_delete=models.CASCADE),
 
 
 class Comment(models.Model):
