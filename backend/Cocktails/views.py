@@ -1,16 +1,27 @@
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib import messages
 
 rate = 3.5
 
 
-def index(req):
-    return HttpResponse("Hello, world. You're at the cocktails index.")
-
-
 def login(request):
-    return render(request, "login.html")
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            auth_login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'login.html', {'error_message': 'Invalid credentials'})
+    else:
+        return render(request, 'login.html')
+
 
 
 def register(req):
