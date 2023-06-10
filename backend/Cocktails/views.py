@@ -21,5 +21,8 @@ def home(request):
     response = requests.get(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     cocktails = response.json()['drinks']
-    return render(request, "cocktails.html", {"cocktails": cocktails, "rate": rate})
+    for i in range(15):
+        ingr = [response.json()['drinks']['strIngredient'+str(i)]]
+        ingrs.append(ingr)
+    return render(request, "cocktails.html", {"cocktails": cocktails, "rate": rate}, ingrs)
     pass
