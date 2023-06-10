@@ -10,7 +10,7 @@ def index(req):
 
 
 def login(req):
-    return HttpResponse("This is login page.")
+    return render(req, "login.html")
 
 
 def register(req):
