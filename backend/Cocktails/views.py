@@ -1,9 +1,8 @@
 import requests
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.contrib import messages
+from .models import User
 
 rate = 3.5
 
@@ -23,9 +22,17 @@ def login(request):
         return render(request, 'login.html')
 
 
-
 def register(request):
-    return render(request, "register.html")
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user_profile = User(username=username, password=password)
+        user_profile.save()
+
+        return redirect('home')
+    else:
+        return render(request, 'register.html')
 
 
 def home(request):
