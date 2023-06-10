@@ -9,8 +9,8 @@ def index(req):
     return HttpResponse("Hello, world. You're at the cocktails index.")
 
 
-def login(req):
-    return render(req, "login.html")
+def login(request):
+    return render(request, "login.html")
 
 
 def register(req):
