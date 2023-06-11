@@ -15,7 +15,7 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('home')
+            return redirect('loggedin')
         else:
             return render(request, 'login.html', {'error_message': 'Invalid credentials'})
     else:
@@ -41,9 +41,13 @@ def home(request):
     response = requests.get(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     cocktails = response.json()['drinks']
-    return render(request, "cocktails.html", {"cocktails": cocktails, "rate": rate})
-    pass
+    return render(request, "home.html", {"cocktails": cocktails, "rate": rate})
 
+def loggedinHome(request):
+    response = requests.get(
+        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
+    cocktails = response.json()['drinks']
+    return render(request, "loggedinhome.html", {"cocktails": cocktails, "rate": rate})
 
 '''
 arrayOfIngredients.push(
