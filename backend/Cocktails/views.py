@@ -17,7 +17,7 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('home')
+            return redirect('cocktailDB')
         else:
             return render(request, 'login.html', {'error_message': 'Invalid credentials'})
     else:
@@ -34,7 +34,7 @@ def register(request):
 
         user_profile.save()
 
-        return redirect('home')
+        return redirect('cocktailDB')
     else:
         return render(request, 'register.html')
 
@@ -54,7 +54,7 @@ def newrecipe(req):
         recipe = Recipe(user=req.user, title=title, body=body, rating=rating)
         recipe.save()
 
-        return redirect('home')
+        return redirect('cocktailDB')
     else:
         return render(req, 'newrecipe.html')
 
@@ -87,7 +87,7 @@ def home(request):
 
 def logout_view(request):
     auth_logout(request)
-    return redirect('home')
+    return redirect('cocktailDB')
 
 
 '''

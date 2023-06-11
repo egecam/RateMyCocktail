@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # this is homepage
+    path('', views.home, name='cocktailDB'),  # this is homepage
     # this is the second homepage aka community page
     path('community', views.community, name='community'),
     # this is for creating a new recipe
