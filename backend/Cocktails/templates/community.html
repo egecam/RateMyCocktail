@@ -42,6 +42,7 @@
           <table class="table">
               <thead>
                   <tr>
+                      <th>Author</th>
                       <th>Cocktail</th>
                       <th>Recipe</th>
                       <th>Rating</th>
@@ -50,6 +51,7 @@
               <tbody>
                   {% for item in res %}
                   <tr>
+                      <td>{{ item.user }}</td>
                       <td>{{ item.title }}</td>
                       <td>{{ item.body }}</td>
                       <td><input type="range" min="0" max="5" ><br> Avg: {{ item.rating }}</td>
