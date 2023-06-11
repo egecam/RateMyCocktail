@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
-import json
+from django.contrib.auth import logout as auth_logout
 
 rate = 3.5
 
@@ -16,7 +16,7 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('loggedin')
+            return redirect('home')
         else:
             return render(request, 'login.html', {'error_message': 'Invalid credentials'})
     else:
@@ -45,8 +45,8 @@ def home(request):
 
     arrayOfIngr = {"drink0": [], "drink1": [], "drink2": [],
                    "drink3": [], "drink4": [], "drink5": []}
+    ingr = arrayOfIngr
 
-    '''
     for j in range(0, len(cocktails)):
         for i in range(1, 15):
             ingredient = "strIngredient" + str(i)
@@ -55,9 +55,12 @@ def home(request):
                 lst = cocktails[j][ingredient]
                 arrayOfIngr[element].append(lst)
 
-    json_object = json.dumps(arrayOfIngr, indent=4)
-    '''
-    return render(request, "home.html", {"cocktails": cocktails, "rate": rate})
+    ingr = []
+    for key, value in arrayOfIngr.items():
+        ingr.append({'name': key, 'ingredients': value})
+    
+
+    return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": ingr})
     # "ingr": json_object
     pass
 
@@ -67,6 +70,10 @@ def loggedinHome(request):
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     cocktails = response.json()['drinks']
     return render(request, "loggedinhome.html", {"cocktails": cocktails, "rate": rate})
+
+def logout_view(request):
+    auth_logout(request)
+    return redirect('home')
 
 
 '''
