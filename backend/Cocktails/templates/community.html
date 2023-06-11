@@ -42,18 +42,17 @@
           <table class="table">
               <thead>
                   <tr>
-                      <th></th>
                       <th>Cocktail</th>
                       <th>Recipe</th>
                       <th>Rating</th>
                   </tr>
               </thead>
               <tbody>
-                  {% for cocktails in cocktails %}
+                  {% for item in res %}
                   <tr>
-                      <td>{{ cocktails.strDrink }}</td>
-                      <td>{{ cocktails.strInstructions }}</td>
-                      <td><input type="range" min="0" max="5" ><br>Avg: {{ rate }} </td>
+                      <td>{{ item.title }}</td>
+                      <td>{{ item.body }}</td>
+                      <td><input type="range" min="0" max="5" ><br> Avg: {{ item.rating }}</td>
                   </tr>
                   {% endfor %}    
               </tbody>

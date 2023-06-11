@@ -40,7 +40,7 @@ def register(request):
 
 
 def community(req):
-    res = Recipes.objects.all()
+    res = Recipe.objects.all()
 
     return render(req, "community.html", {'res': res})
 
