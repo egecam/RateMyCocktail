@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
+import json
 
 rate = 3.5
 
@@ -45,6 +46,7 @@ def home(request):
     arrayOfIngr = {"drink0": [], "drink1": [], "drink2": [],
                    "drink3": [], "drink4": [], "drink5": []}
 
+    '''
     for j in range(0, len(cocktails)):
         for i in range(1, 15):
             ingredient = "strIngredient" + str(i)
@@ -53,7 +55,10 @@ def home(request):
                 lst = cocktails[j][ingredient]
                 arrayOfIngr[element].append(lst)
 
-    return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": arrayOfIngr})
+    json_object = json.dumps(arrayOfIngr, indent=4)
+    '''
+    return render(request, "home.html", {"cocktails": cocktails, "rate": rate})
+    # "ingr": json_object
     pass
 
 
