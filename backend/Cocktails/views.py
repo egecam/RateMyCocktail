@@ -41,13 +41,28 @@ def home(request):
     response = requests.get(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     cocktails = response.json()['drinks']
-    return render(request, "home.html", {"cocktails": cocktails, "rate": rate})
+
+    arrayOfIngr = {"drink0": [], "drink1": [], "drink2": [],
+                   "drink3": [], "drink4": [], "drink5": []}
+
+    for j in range(0, len(cocktails)):
+        for i in range(1, 15):
+            ingredient = "strIngredient" + str(i)
+            element = "drink" + str(j)
+            if cocktails[j][ingredient] is not None:
+                lst = cocktails[j][ingredient]
+                arrayOfIngr[element].append(lst)
+
+    return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": arrayOfIngr})
+    pass
+
 
 def loggedinHome(request):
     response = requests.get(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     cocktails = response.json()['drinks']
     return render(request, "loggedinhome.html", {"cocktails": cocktails, "rate": rate})
+
 
 '''
 arrayOfIngredients.push(
