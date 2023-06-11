@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
+from .models import Recipe
 
 rate = 3.5
 
@@ -38,6 +39,26 @@ def register(request):
         return render(request, 'register.html')
 
 
+def community(req):
+    res = Recipes.objects.all()
+
+    return render(req, "community.html", {'res': res})
+
+
+def newrecipe(req):
+    if req.method == 'POST':
+        title = req.POST.get('title')
+        body = req.POST.get('body')
+        rating = req.POST.get('rating')
+
+        recipe = Recipe(user=req.user, title=title, body=body, rating=rating)
+        recipe.save()
+
+        return redirect('home')
+    else:
+        return render(req, 'newrecipe.html')
+
+
 def home(request):
     response = requests.get(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
@@ -58,18 +79,11 @@ def home(request):
     ingr = []
     for key, value in arrayOfIngr.items():
         ingr.append({'name': key, 'ingredients': value})
-    
 
     return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": ingr})
     # "ingr": json_object
     pass
 
-
-def loggedinHome(request):
-    response = requests.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
-    cocktails = response.json()['drinks']
-    return render(request, "loggedinhome.html", {"cocktails": cocktails, "rate": rate})
 
 def logout_view(request):
     auth_logout(request)
