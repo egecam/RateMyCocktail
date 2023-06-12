@@ -41,11 +41,18 @@ def register(request):
 
 
 def community(request: HttpRequest) -> HttpResponse:
-    recipes = Recipe.objects.all()
-    for recipe in recipes:
-        rating = Rating.objects.filter(recipe=recipe, user=request.user).first()
-        recipe.user_rating = rating.rating if rating else 0
-    return render(request, "community.html", {"recipes": recipes})
+    if request.user.is_authenticated:
+        recipes = Recipe.objects.all()
+        for recipe in recipes:
+            rating = Rating.objects.filter(recipe=recipe, user=request.user).first()
+            recipe.user_rating = rating.rating if rating else 0
+        return render(request, "community.html", {"recipes": recipes})
+    else:
+        recipes = Recipe.objects.all()
+        for recipe in recipes:
+            rating = Rating.objects.filter(recipe=recipe, user = request.user.id).first()
+            recipe.user_rating = rating.rating if rating else 0
+        return render(request, "community.html", {"recipes": recipes})
 
 def rate(request: HttpRequest, recipe_id: int, rating: int) -> HttpResponse:
     recipe = Recipe.objects.get(id=recipe_id)
