@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
 
 
 class Recipe(models.Model):
@@ -7,4 +8,17 @@ class Recipe(models.Model):
     title = models.CharField(max_length=25)
     ingredients = models.CharField(max_length=1000)
     body = models.CharField(max_length=1000)
-    rating = models.FloatField(null=True)
+    
+    def average_rating(self) -> float:
+        return Rating.objects.filter(recipe=self).aggregate(Avg("rating"))["rating__avg"] or 0
+
+    def __str__(self):
+        return f"{self.title}: {self.average_rating()}"
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.post.title}: {self.rating}"

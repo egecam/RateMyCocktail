@@ -1,10 +1,11 @@
+from django.http import HttpRequest, HttpResponse
 import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
-from .models import Recipe
+from .models import Recipe, Rating
 
 rate = 3.5
 
@@ -39,10 +40,18 @@ def register(request):
         return render(request, 'register.html')
 
 
-def community(req):
-    res = Recipe.objects.all()
+def community(request: HttpRequest) -> HttpResponse:
+    recipes = Recipe.objects.all()
+    for recipe in recipes:
+        rating = Rating.objects.filter(recipe=recipe, user=request.user).first()
+        recipe.user_rating = rating.rating if rating else 0
+    return render(request, "community.html", {"recipes": recipes})
 
-    return render(req, "community.html", {'res': res})
+def rate(request: HttpRequest, recipe_id: int, rating: int) -> HttpResponse:
+    recipe = Recipe.objects.get(id=recipe_id)
+    Rating.objects.filter(recipe=recipe, user=request.user).delete()
+    recipe.rating_set.create(user=request.user, rating=rating)
+    return community(request)
 
 
 def newrecipe(req):
@@ -78,7 +87,7 @@ def home(request):
 
     arrayOfIngr.values()
 
-    return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": ingr})
+    return render(request, "home.html", {"cocktails": cocktails, "ingr": ingr})
     # "ingr": json_object
     pass
 

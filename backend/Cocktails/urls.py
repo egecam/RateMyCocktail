@@ -10,5 +10,6 @@ urlpatterns = [
     path('newrecipe', views.newrecipe, name='newrecipe'),
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
-    path('logout', views.logout_view, name='logout')
+    path('logout', views.logout_view, name='logout'),
+    path('rate/<int:recipe_id>/<int:rating>/', views.rate),
 ]
