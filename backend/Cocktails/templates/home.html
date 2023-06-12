@@ -37,7 +37,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
-        <h1 class="text-center">Cocktails from CocktailDB</h1>
+        <h1 class="text-center">Random Cocktail from CocktailDB</h1>
       
 
         <div class="container mt-5">
@@ -46,8 +46,8 @@
                   <tr>
                       <th></th>
                       <th>Cocktail</th>
+                      <th>Ingredients</th>
                       <th>Recipe</th>
-                      <th>Rating</th>
                   </tr>
               </thead>
               <tbody>
@@ -55,8 +55,16 @@
                   <tr>
                       <td><img src="{{ cocktails.strDrinkThumb }}" width="100" height="100"></td>
                       <td>{{ cocktails.strDrink }}</td>
+                      {% for name, ingredients in ingr.items %}
+                            <td>
+                            <ul>
+                                {% for ingredient in ingredients %}
+                                    <li>{{ ingredient }}</li>
+                                {% endfor %}
+                            </ul>
+                            </td>
+                        {% endfor %}
                       <td>{{ cocktails.strInstructions }}</td>
-                      <td><br><input type="range" min="0" max="5" ><br>Avg: {{ rate }} </td>
                   </tr>
                   {% endfor %}    
               </tbody>
@@ -104,7 +112,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
   
-          <h1 class="text-center">Cocktails from CocktailDB</h1>
+          <h1 class="text-center">Random Cocktail from CocktailDB</h1>
         
   
           <div class="container mt-5">
@@ -113,8 +121,8 @@
                     <tr>
                         <th></th>
                         <th>Cocktail</th>
+                        <th>Ingredients</th>
                         <th>Recipe</th>
-                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,10 +130,18 @@
                     <tr>
                         <td><img src="{{ cocktails.strDrinkThumb }}" width="100" height="100"></td>
                         <td>{{ cocktails.strDrink }}</td>
+                        {% for name, ingredients in ingr.items %}
+                            <td>
+                            <ul>
+                                {% for ingredient in ingredients %}
+                                    <li>{{ ingredient }}</li>
+                                {% endfor %}
+                            </ul>
+                            </td>
+                        {% endfor %}
                         <td>{{ cocktails.strInstructions }}</td>
-                        <td>Avg: {{ rate }} </td>
                     </tr>
-                    {% endfor %}    
+                    {% endfor %}
                 </tbody>
             </table>
       </div>

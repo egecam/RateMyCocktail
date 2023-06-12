@@ -46,6 +46,7 @@
                   <tr>
                       <th>User</th>
                       <th>Cocktail</th>
+                      <th>Ingredients</th>
                       <th>Recipe</th>
                       <th>Rating</th>
                   </tr>
@@ -55,6 +56,7 @@
                   <tr>
                       <td>{{ item.user }}</td>
                       <td>{{ item.title }}</td>
+                      <td>{{ item.ingredients }}</pre></td>
                       <td>{{ item.body }}</td>
                       <td><input type="range" min="0" max="5" ><br> Avg: {{ item.rating }}</td>
                   </tr>
@@ -113,6 +115,7 @@
                 <tr>
                     <th>User</th>
                     <th>Cocktail</th>
+                    <th>Ingredients</th>
                     <th>Recipe</th>
                     <th>Rating</th>
                 </tr>
@@ -122,6 +125,7 @@
                 <tr>
                     <td>{{ item.user }}</td>
                     <td>{{ item.title }}</td>
+                    <td>{{ item.ingredients }}</td>
                     <td>{{ item.body }}</td>
                     <td>Avg: {{ item.rating }}</td>
                 </tr>

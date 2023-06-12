@@ -48,10 +48,11 @@ def community(req):
 def newrecipe(req):
     if req.method == 'POST':
         title = req.POST.get('title')
+        ingredients = req.POST.get('ingredients')
         body = req.POST.get('body')
         rating = req.POST.get('rating')
 
-        recipe = Recipe(user=req.user, title=title, body=body, rating=rating)
+        recipe = Recipe(user=req.user, title=title,ingredients = ingredients, body=body, rating=rating)
         recipe.save()
 
         return redirect('cocktailDB')
@@ -61,11 +62,10 @@ def newrecipe(req):
 
 def home(request):
     response = requests.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
+        "http://www.thecocktaildb.com/api/json/v1/1/random.php")
     cocktails = response.json()['drinks']
 
-    arrayOfIngr = {"drink0": [], "drink1": [], "drink2": [],
-                   "drink3": [], "drink4": [], "drink5": []}
+    arrayOfIngr = {"drink0": []}
     ingr = arrayOfIngr
 
     for j in range(0, len(cocktails)):
@@ -76,9 +76,7 @@ def home(request):
                 lst = cocktails[j][ingredient]
                 arrayOfIngr[element].append(lst)
 
-    ingr = []
-    for key, value in arrayOfIngr.items():
-        ingr.append({'name': key, 'ingredients': value})
+    arrayOfIngr.values()
 
     return render(request, "home.html", {"cocktails": cocktails, "rate": rate, "ingr": ingr})
     # "ingr": json_object
