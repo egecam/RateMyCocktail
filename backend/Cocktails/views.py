@@ -6,6 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from .models import Recipe, Rating
+from django.contrib import messages
 
 rate = 3.5
 
@@ -20,7 +21,8 @@ def login(request):
             auth_login(request, user)
             return redirect('cocktailDB')
         else:
-            return render(request, 'login.html', {'error_message': 'Invalid credentials'})
+            messages.error(request, "Invalid credentials.")
+            return render(request, 'login.html')
     else:
         return render(request, 'login.html')
 
@@ -29,6 +31,10 @@ def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
+        if User.objects.filter(username = username).first():
+            messages.error(request, "This username is already taken. Choose another one.")
+            return render(request, 'register.html')
 
         user_profile = User.objects.create_user(
             username=username, password=password)
