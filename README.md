@@ -24,7 +24,7 @@ We didn't create a model for "user". We just simply use the built-in Django User
 
 ## Views
 
-#### Having a template
+#### With a template
 + Home 
 
 Contains a random cocktail page which works with a third party API (CocktailDB) to fetch random cocktail data every single refresh. 
@@ -53,7 +53,7 @@ if User.objects.filter(username = username).first():
 
 User can login to an existing accout with a correct username-password pair.
 
-#### Not having a template
+#### Without a template
 
 + Logout
 
