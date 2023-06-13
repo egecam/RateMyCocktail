@@ -2,9 +2,8 @@ from django.http import HttpRequest, HttpResponse
 import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
-from django.contrib.auth import logout as auth_logout
 from .models import Recipe, Rating
 from django.contrib import messages
 
