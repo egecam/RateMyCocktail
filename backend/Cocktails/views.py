@@ -41,7 +41,7 @@ def register(request):
 
         user_profile.save()
 
-        return redirect('cocktailDB')
+        return redirect('community')
     else:
         return render(request, 'register.html')
 
