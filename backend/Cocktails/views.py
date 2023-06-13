@@ -58,7 +58,7 @@ def community(request: HttpRequest) -> HttpResponse:
         for recipe in recipes:
             rating = Rating.objects.filter(recipe=recipe, user = request.user.id).first()
             recipe.user_rating = rating.rating if rating else 0
-        return render(request, "community.html", {"recipes": recipes})
+        return render(request, "community.html", {"recipes": recipes, "user": request.user.id})
 
 def rate(request: HttpRequest, recipe_id: int, rating: int) -> HttpResponse:
     recipe = Recipe.objects.get(id=recipe_id)
@@ -77,10 +77,15 @@ def newrecipe(req):
         recipe = Recipe(user=req.user, title=title,ingredients = ingredients, body=body, rating=rating)
         recipe.save()
 
-        return redirect('cocktailDB')
+        return redirect('community')
     else:
         return render(req, 'newrecipe.html')
 
+def delete(req: HttpRequest, recipe_id: int) -> HttpResponse:
+    recipe = Recipe.objects.get(id=recipe_id)
+    recipe.delete()
+    return community(req)
+    
 
 def home(request):
     response = requests.get(
