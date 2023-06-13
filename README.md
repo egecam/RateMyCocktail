@@ -25,18 +25,21 @@ We didn't create a model for "user". We just simply use the built-in Django User
 ## Views
 
 #### Having a template
-+ Home
++ Home 
 
 Contains a random cocktail page which works with a third party API (CocktailDB) to fetch random cocktail data every single refresh. 
 
 + Community
+
 User-created cocktail data are being represented here. Users can rate listed recipes with the Rating function. Average rating score is shown right after the recipe.
 
 + New recipe
+
 The view for creating a new recipe with Title, Ingredients and Description fields.
 
 
 + Register
+
 The view where the user can create an account with a username and a password. Username must be unique and it is checked by;
 ```
 if User.objects.filter(username = username).first():
@@ -47,11 +50,13 @@ if User.objects.filter(username = username).first():
  `User` model is imported from `django.contrib.auth.models` package and `messages` from `django.contrib`.
 
  + Login
+
 User can login to an existing accout with a correct username-password pair.
 
 #### Not having a template
 
 + Logout
+
 A simple logout view, works with the logout method from `django.contrib.auth`.
 
 + Delete
