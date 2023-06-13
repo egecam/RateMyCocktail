@@ -81,7 +81,7 @@ def newrecipe(req):
     else:
         return render(req, 'newrecipe.html')
 
-def delete(recipe_id: int):
+def delete(request, recipe_id: int):
     recipe = Recipe.objects.get(id=recipe_id)
     recipe.delete()
     return redirect('community')
