@@ -85,8 +85,8 @@
                     {% endif %}
                       <td>{{ recipe.user }}</td>
                       <td>{{ recipe.title }}</td>
-                      <td><pre style="font-size:16px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{ recipe.ingredients }}</pre></td>
-                      <td><pre style="font-size:16px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{ recipe.body }}</pre></td>
+                      <td>{{ recipe.ingredients }}</td>
+                      <td>{{ recipe.body }}</td>
                       <td><p class="card-title"> Avg Rating:
                       <span class="fa fa-star {% if recipe.average_rating > 0 %} checked {% endif %}"></span>
                       <span class="fa fa-star {% if recipe.average_rating > 1 %} checked {% endif %}"></span>
@@ -212,12 +212,11 @@
                     <td>{{ recipe.ingredients }}</td>
                     <td>{{ recipe.body }}</td>
                     <td><p class="card-title"> Avg Rating:
-                        <td><pre style="font-size:16px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{ recipe.ingredients }}</pre></td>
-                        <td><pre style="font-size:16px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{ recipe.body }}</pre></td>
-                        <span class="fa fa-star {% if recipe.average_rating > 2 %} checked {% endif %}"></span>
-                        <span class="fa fa-star {% if recipe.average_rating > 3 %} checked {% endif %}" ></span>
-                        <span class="fa fa-star {% if recipe.average_rating > 4 %} checked {% endif %}"></span>
-                        </p>
+                        <span class="fa fa-star {% if recipe.average_rating > 0 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if recipe.average_rating > 1 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if recipe.average_rating > 2 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if recipe.average_rating > 3 %} checked {% endif %}" ></span>
+                      <span class="fa fa-star {% if recipe.average_rating > 4 %} checked {% endif %}"></span></p>
                     </td>
                 </tr>
                 {% endfor %}    
