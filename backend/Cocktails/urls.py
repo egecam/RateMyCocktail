@@ -12,4 +12,5 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('logout', views.logout_view, name='logout'),
     path('rate/<int:recipe_id>/<int:rating>/', views.rate),
+    path('delete/<int:recipe_id>', views.delete),
 ]

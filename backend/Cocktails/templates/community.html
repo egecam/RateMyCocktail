@@ -78,10 +78,7 @@
                   {% for recipe in recipes %}
                   <tr>
                     {% if recipe.user == request.user %}
-                    <form class="form-delete" method="post">
-                        {% csrf_token %}
-                        <td><button class="btn btn-sm btn-danger btn-block" type="submit">Delete</button></td>
-                    </form>
+                    <td><a href="delete/{{ recipe.id }}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
                         {% else %}
                     <td></td>
                     {% endif %}

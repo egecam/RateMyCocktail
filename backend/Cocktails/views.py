@@ -81,10 +81,10 @@ def newrecipe(req):
     else:
         return render(req, 'newrecipe.html')
 
-def delete(req: HttpRequest, recipe_id: int) -> HttpResponse:
+def delete(recipe_id: int):
     recipe = Recipe.objects.get(id=recipe_id)
     recipe.delete()
-    return community(req)
+    return redirect('community')
     
 
 def home(request):
