@@ -5,9 +5,9 @@ from django.db.models import Avg
 
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=25)
-    ingredients = models.CharField(max_length=1000)
-    body = models.CharField(max_length=1000)
+    title = models.CharField(max_length=100)
+    ingredients = models.CharField(max_length=100)
+    body = models.CharField(max_length=100)
     
     def average_rating(self) -> float:
         return Rating.objects.filter(recipe=self).aggregate(Avg("rating"))["rating__avg"] or 0

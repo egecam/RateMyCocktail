@@ -20,9 +20,9 @@
           </h1>
         </a>
         <h1 class="h3 mb-3 font-weight-normal">RateMyCocktail</h1>
-        <input id="title" class="form-control" placeholder="Title of recipe" name = "title" required="" autofocus="" type="text">
-        <textarea id="body" class="form-control" placeholder="Ingredients (Please seperate items with comma)" name = "ingredients" required="" type="text" rows="2"></textarea>
-        <textarea id="body" class="form-control" placeholder="Description" name = "body" required="" type="text" rows="5"></textarea>
+        <input id="title" class="form-control" placeholder="Title of Recipe (25 Character Max)" name = "title" required="" autofocus="" type="text" maxlength="25">
+        <textarea id="body" class="form-control" placeholder="Ingredients (30 Character Max)" name = "ingredients" required="" type="text" rows="2" maxlength="30"></textarea>
+        <textarea id="body" class="form-control" placeholder="Recipe (60 Character Max)" name = "body" required="" type="text" rows="5" maxlength="60"></textarea>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Publish</button>
     </form>
